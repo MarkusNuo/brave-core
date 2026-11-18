@@ -78,6 +78,7 @@ class BraveRendererUpdater : public KeyedService {
   IntegerPrefMember brave_wallet_ethereum_provider_;
   IntegerPrefMember brave_wallet_solana_provider_;
   IntegerPrefMember brave_wallet_cardano_provider_;
+  IntegerPrefMember brave_wallet_polkadot_provider_;
 #endif
   BooleanPrefMember de_amp_enabled_;
   BooleanPrefMember widevine_enabled_;

@@ -153,6 +153,7 @@ class BraveWalletService : public KeyedService,
   void SetDefaultEthereumWallet(mojom::DefaultWallet default_wallet) override;
   void SetDefaultSolanaWallet(mojom::DefaultWallet default_wallet) override;
   void SetDefaultCardanoWallet(mojom::DefaultWallet default_wallet) override;
+  void SetDefaultPolkadotWallet(mojom::DefaultWallet default_wallet) override;
 
   void GetDefaultBaseCurrency(GetDefaultBaseCurrencyCallback callback) override;
   void SetDefaultBaseCurrency(const std::string& currency) override;
@@ -419,6 +420,7 @@ class BraveWalletService : public KeyedService,
   void OnDefaultEthereumWalletChanged();
   void OnDefaultSolanaWalletChanged();
   void OnDefaultCardanoWalletChanged();
+  void OnDefaultPolkadotWalletChanged();
 
   void OnDefaultBaseCurrencyChanged();
   void OnNetworkListChanged();

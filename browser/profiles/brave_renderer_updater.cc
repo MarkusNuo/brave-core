@@ -58,6 +58,8 @@ BraveRendererUpdater::BraveRendererUpdater(
                                      pref_service);
   brave_wallet_cardano_provider_.Init(brave_wallet::kDefaultCardanoWallet,
                                       pref_service);
+  brave_wallet_polkadot_provider_.Init(brave_wallet::kDefaultPolkadotWallet,
+                                      pref_service),
 #endif
 
   de_amp_enabled_.Init(de_amp::kDeAmpPrefEnabled, pref_service);
@@ -80,6 +82,10 @@ BraveRendererUpdater::BraveRendererUpdater(
       brave_wallet::kDefaultCardanoWallet,
       base::BindRepeating(&BraveRendererUpdater::UpdateAllRenderers,
                           base::Unretained(this)));
+  pref_change_registrar_.Add(
+          brave_wallet::kDefaultPolkadotWallet,
+          base::BindRepeating(&BraveRendererUpdater::UpdateAllRenderers,
+                              base::Unretained(this)));
   // The wallet can be disabled at runtime by policy (e.g. via Brave Origin).
   // When that happens the renderers must stop installing the provider objects
   // so they don't request interface binders the browser no longer registers.
@@ -266,10 +272,11 @@ void BraveRendererUpdater::UpdateRenderer(
       can_install_providers && brave_wallet::IsCardanoDAppSupportEnabled() &&
       default_cardano_wallet == brave_wallet::mojom::DefaultWallet::BraveWallet;
 
-  // There is no default-wallet pref for Polkadot yet, so the feature flag is
-  // the only per-chain gate.
+  auto default_polkadot_wallet = static_cast<brave_wallet::mojom::DefaultWallet>(
+    brave_wallet_polkadot_provider_.GetValue());
   bool install_window_brave_polkadot_provider =
-      can_install_providers && brave_wallet::IsPolkadotDAppSupportEnabled();
+      can_install_providers && brave_wallet::IsPolkadotDAppSupportEnabled() &&
+      default_polkadot_wallet == brave_wallet::mojom::DefaultWallet::BraveWallet;
 #endif  // BUILDFLAG(ENABLE_BRAVE_WALLET)
 
   PrefService* pref_service = profile_->GetPrefs();

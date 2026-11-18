@@ -70,9 +70,12 @@ void SetDefaultSolanaWallet(PrefService* prefs,
                             mojom::DefaultWallet default_wallet);
 void SetDefaultCardanoWallet(PrefService* prefs,
                              mojom::DefaultWallet default_wallet);
+void SetDefaultPolkadotWallet(PrefService* prefs,
+                             mojom::DefaultWallet default_wallet);
 mojom::DefaultWallet GetDefaultEthereumWallet(PrefService* prefs);
 mojom::DefaultWallet GetDefaultSolanaWallet(PrefService* prefs);
 mojom::DefaultWallet GetDefaultCardanoWallet(PrefService* prefs);
+mojom::DefaultWallet GetDefaultPolkadotWallet(PrefService* prefs);
 void SetDefaultBaseCurrency(PrefService* prefs, std::string_view currency);
 std::string GetDefaultBaseCurrency(PrefService* prefs);
 

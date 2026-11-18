@@ -623,6 +623,11 @@ mojom::DefaultWallet GetDefaultCardanoWallet(PrefService* prefs) {
       prefs->GetInteger(kDefaultCardanoWallet));
 }
 
+mojom::DefaultWallet GetDefaultPolkadotWallet(PrefService* prefs) {
+  return static_cast<brave_wallet::mojom::DefaultWallet>(
+      prefs->GetInteger(kDefaultPolkadotWallet));
+}
+
 void SetDefaultEthereumWallet(PrefService* prefs,
                               mojom::DefaultWallet default_wallet) {
   // We should not be using this value anymore
@@ -642,6 +647,13 @@ void SetDefaultCardanoWallet(PrefService* prefs,
   DCHECK(default_wallet == mojom::DefaultWallet::BraveWallet ||
          default_wallet == mojom::DefaultWallet::None);
   prefs->SetInteger(kDefaultCardanoWallet, static_cast<int>(default_wallet));
+}
+
+void SetDefaultPolkadotWallet(PrefService* prefs,
+                              mojom::DefaultWallet default_wallet){
+  DCHECK(default_wallet == mojom::DefaultWallet::BraveWallet ||
+         default_wallet == mojom::DefaultWallet::None);
+  prefs->SetInteger(kDefaultPolkadotWallet, static_cast<int>(default_wallet));
 }
 
 void SetDefaultBaseCurrency(PrefService* prefs, std::string_view currency) {

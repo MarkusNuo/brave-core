@@ -18,6 +18,7 @@ class BraveWalletServiceObserverBase
   void OnDefaultEthereumWalletChanged(mojom::DefaultWallet wallet) override {}
   void OnDefaultSolanaWalletChanged(mojom::DefaultWallet wallet) override {}
   void OnDefaultCardanoWalletChanged(mojom::DefaultWallet wallet) override {}
+  void OnDefaultPolkadotWalletChanged(mojom::DefaultWallet wallet) override {}
   void OnDefaultBaseCurrencyChanged(const std::string& currency) override {}
   void OnNetworkListChanged() override {}
   void OnDiscoverAssetsStarted() override {}

@@ -358,6 +358,10 @@ BraveWalletService::BraveWalletService(
       base::BindRepeating(&BraveWalletService::OnDefaultCardanoWalletChanged,
                           base::Unretained(this)));
   pref_change_registrar_.Add(
+          kDefaultPolkadotWallet,
+          base::BindRepeating(&BraveWalletService::OnDefaultPolkadotWalletChanged,
+                              base::Unretained(this)));
+  pref_change_registrar_.Add(
       kDefaultBaseCurrency,
       base::BindRepeating(&BraveWalletService::OnDefaultBaseCurrencyChanged,
                           base::Unretained(this)));
@@ -745,6 +749,15 @@ void BraveWalletService::SetDefaultCardanoWallet(
   }
 }
 
+void BraveWalletService::SetDefaultPolkadotWallet(
+    mojom::DefaultWallet default_wallet) {
+  auto old_default_wallet =
+      ::brave_wallet::GetDefaultPolkadotWallet(profile_prefs_);
+  if (old_default_wallet != default_wallet) {
+    ::brave_wallet::SetDefaultPolkadotWallet(profile_prefs_, default_wallet);
+  }
+}
+
 void BraveWalletService::GetDefaultBaseCurrency(
     GetDefaultBaseCurrencyCallback callback) {
   std::move(callback).Run(
@@ -958,6 +971,13 @@ void BraveWalletService::OnDefaultCardanoWalletChanged() {
   auto default_wallet = ::brave_wallet::GetDefaultCardanoWallet(profile_prefs_);
   for (const auto& observer : observers_) {
     observer->OnDefaultCardanoWalletChanged(default_wallet);
+  }
+}
+
+void BraveWalletService::OnDefaultPolkadotWalletChanged() {
+  auto default_wallet = ::brave_wallet::GetDefaultPolkadotWallet(profile_prefs_);
+  for (const auto& observer : observers_) {
+    observer->OnDefaultPolkadotWalletChanged(default_wallet);
   }
 }
 

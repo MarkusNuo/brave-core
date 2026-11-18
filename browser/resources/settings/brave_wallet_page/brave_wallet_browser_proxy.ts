@@ -38,6 +38,7 @@ export type Option = {
 
 export type SolanaProvider = Option
 export type CardanoProvider = Option
+export type PolkadotProvider = Option
 
 export interface BraveWalletBrowserProxy {
   resetWallet: () => void
@@ -45,6 +46,7 @@ export interface BraveWalletBrowserProxy {
   getWeb3ProviderList: () => Promise<string>
   getSolanaProviderOptions: () => Promise<SolanaProvider[]>
   getCardanoProviderOptions: () => Promise<CardanoProvider[]>
+  getPolkadotProviderOptions: () => Promise<PolkadotProvider[]>
   getTransactionSimulationOptInStatusOptions: () => Promise<Option[]>
   isBitcoinEnabled: () => Promise<boolean>
   isZCashEnabled: () => Promise<boolean>
@@ -126,6 +128,10 @@ export class BraveWalletBrowserProxyImpl implements BraveWalletBrowserProxy {
 
   getCardanoProviderOptions() {
     return sendWithPromise<CardanoProvider[]>('getCardanoProviderOptions')
+  }
+
+  getPolkadotProviderOptions() {
+    return sendWithPromise<PolkadotProvider[]>('getPolkadotProviderOptions')
   }
 
   isBitcoinEnabled() {

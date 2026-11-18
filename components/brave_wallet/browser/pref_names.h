@@ -26,6 +26,8 @@ inline constexpr char kDefaultSolanaWallet[] =
     "brave.wallet.default_solana_wallet";
 inline constexpr char kDefaultCardanoWallet[] =
     "brave.wallet.default_cardano_wallet";
+inline constexpr char kDefaultPolkadotWallet[] =
+    "brave.wallet.default_polkadot_wallet";
 inline constexpr char kDefaultBaseCurrency[] =
     "brave.wallet.default_base_currency";
 inline constexpr char kShowWalletIconOnToolbar[] =

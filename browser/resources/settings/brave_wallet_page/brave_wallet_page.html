@@ -97,6 +97,15 @@
       </settings-dropdown-menu>
     </div>
   </div>
+  <div hidden="[[!isPolkadotDAppSupportEnabled_]]">
+    <div class="settings-box">
+      <div class="start">$i18n{defaultPolkadotWalletDesc}</div>
+      <settings-dropdown-menu id="defaultPolkadotWalletType"
+        pref-key="brave.wallet.default_polkadot_wallet"
+        menu-options="[[polkadot_provider_options_]]">
+      </settings-dropdown-menu>
+    </div>
+  </div>
   <div class="settings-box">
     <div class="start">$i18n{defaultBaseCurrencyDesc}</div>
     <settings-dropdown-menu id="defaultBaseCurrencyType"

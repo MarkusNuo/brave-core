@@ -2828,6 +2828,9 @@ interface BraveWalletServiceObserver {
   // Fired when the default Cardano wallet setting changes
   OnDefaultCardanoWalletChanged(DefaultWallet wallet);
 
+  // Fired when the default Polkadot wallet setting changes
+  OnDefaultPolkadotWalletChanged(DefaultWallet wallet);
+
   // Fired when the default base currency changes (e.g. USD -> CAD)
   OnDefaultBaseCurrencyChanged(string currency);
 

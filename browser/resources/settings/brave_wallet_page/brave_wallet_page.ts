@@ -24,7 +24,8 @@ import {
 import type {
   Option,
   SolanaProvider,
-  CardanoProvider
+  CardanoProvider,
+  PolkadotProvider
 } from './brave_wallet_browser_proxy.js'
 
 import {assert} from 'chrome://resources/js/assert.js'
@@ -77,6 +78,13 @@ class SettingsBraveWalletPage extends SettingsBraveWalletPageBase {
         }
       },
 
+      polkadot_provider_options_: {
+        type: Array,
+        value() {
+          return []
+        }
+      },
+
       transaction_simulation_opt_in_options_: {
         type: Array,
         value() {
@@ -116,6 +124,7 @@ class SettingsBraveWalletPage extends SettingsBraveWalletPageBase {
   private declare ethereum_provider_options_: Option[]
   private declare solana_provider_options_: SolanaProvider[]
   private declare cardano_provider_options_: CardanoProvider[]
+  private declare polkadot_provider_options_: PolkadotProvider[]
   private declare transaction_simulation_opt_in_options_: Option[]
   private declare currency_list_: CurrencyType[]
   private declare isTransactionSimulationsFeatureEnabled: boolean
@@ -139,6 +148,9 @@ class SettingsBraveWalletPage extends SettingsBraveWalletPageBase {
     })
     this.browserProxy_.getCardanoProviderOptions().then(list => {
       this.cardano_provider_options_ = list
+    })
+    this.browserProxy_.getPolkadotProviderOptions().then(list => {
+      this.polkadot_provider_options_ = list
     })
     this.browserProxy_.getAutoLockMinutes().then(val => {
       this.$.walletAutoLockMinutes.value = String(val)

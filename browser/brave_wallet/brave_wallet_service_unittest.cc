@@ -260,6 +260,10 @@ class TestBraveWalletServiceObserver
     default_cardano_wallet_ = wallet;
     default_cardano_wallet_changed_fired_ = true;
   }
+  void OnDefaultPolkadotWalletChanged(mojom::DefaultWallet wallet) override {
+    default_polkadot_wallet_ = wallet;
+    default_polkadot_wallet_changed_fired_ = true;
+  }
   void OnDefaultBaseCurrencyChanged(const std::string& currency) override {
     currency_ = currency;
     default_base_currency_changed_fired_ = true;
@@ -279,6 +283,9 @@ class TestBraveWalletServiceObserver
   mojom::DefaultWallet GetDefaultCardanoWallet() {
     return default_cardano_wallet_;
   }
+  mojom::DefaultWallet GetDefaultPolkadotWallet() {
+    return default_polkadot_wallet_;
+  }
   bool DefaultEthereumWalletChangedFired() {
     return default_ethereum_wallet_changed_fired_;
   }
@@ -287,6 +294,9 @@ class TestBraveWalletServiceObserver
   }
   bool DefaultCardanoWalletChangedFired() {
     return default_cardano_wallet_changed_fired_;
+  }
+  bool DefaultPolkadotWalletChangedFired() {
+    return default_polkadot_wallet_changed_fired_;
   }
   std::string GetDefaultBaseCurrency() { return currency_; }
   bool DefaultBaseCurrencyChangedFired() {
@@ -305,6 +315,7 @@ class TestBraveWalletServiceObserver
     default_ethereum_wallet_changed_fired_ = false;
     default_solana_wallet_changed_fired_ = false;
     default_cardano_wallet_changed_fired_ = false;
+    default_polkadot_wallet_changed_fired_ = false;
     default_base_currency_changed_fired_ = false;
     network_list_changed_fired_ = false;
   }
@@ -316,9 +327,12 @@ class TestBraveWalletServiceObserver
       mojom::DefaultWallet::BraveWalletPreferExtension;
   mojom::DefaultWallet default_cardano_wallet_ =
       mojom::DefaultWallet::BraveWallet;
+  mojom::DefaultWallet default_polkadot_wallet_ =
+      mojom::DefaultWallet::BraveWallet;
   bool default_ethereum_wallet_changed_fired_ = false;
   bool default_solana_wallet_changed_fired_ = false;
   bool default_cardano_wallet_changed_fired_ = false;
+  bool default_polkadot_wallet_changed_fired_ = false;
   bool default_base_currency_changed_fired_ = false;
   bool network_list_changed_fired_ = false;
   std::string currency_;
